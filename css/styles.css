@@ -75,3 +75,7 @@ footer {
 .file {
     margin-top: 80px;
 }
+
+.selected {
+    color: #fff;
+}
