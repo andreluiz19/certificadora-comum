@@ -63,3 +63,15 @@ footer {
     padding: 20px;
     font-size: 14px;
 }
+
+.video {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.file {
+    margin-top: 80px;
+}
