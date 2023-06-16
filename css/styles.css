@@ -79,3 +79,77 @@ footer {
 .selected {
     color: #fff;
 }
+
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.create {
+    background-color: #188c33;
+    height: 50px;
+    width: 120px;
+    border: none;
+    border-radius: 8px;
+    color: #FFF;
+    font-size: 1.7rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.insert {
+    background-color: #0099FF;
+    height: 50px;
+    width: 120px;
+    border: none;
+    border-radius: 8px;
+    color: #FFF;
+    font-size: 1.7rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.tableDiv {
+    margin-top: 50px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    padding: 10px 15px;
+    border: 1px solid #000;
+    text-align: center;
+    background-color: #DDD;
+    color: #000;
+}
+
+tr:nth-child(1) {
+    background-color: #DDD;
+    color: #000;
+}
+
+.clear {
+    background-color: #d27111;
+    height: 50px;
+    width: 100px;
+    border: none;
+    border-radius: 8px;
+    color: #FFF;
+    font-size: 1.7rem;
+    font-weight: 500;
+    cursor: pointer;
+}
