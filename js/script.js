@@ -8,21 +8,23 @@ let tbody = document.querySelector('tbody');
 let isCreateTable = false;
 
 // CREATE TABLE usuarios (id,email,senha);
-// INSERT INTO usuarios (id,email,senha) VALUES ('teste','teste','teste');
+// INSERT INTO usuarios (id,email,senha) VALUES (1,'teste','teste');
 
 btnCreate.addEventListener('click', (e) => {
 
     e.preventDefault();
 
+    let semicolon = validateSemicolon();
+
+    if (!semicolon) {
+        return
+    }
+
     if (!input.value.toUpperCase().includes('CREATE TABLE')) {
-        error.innerText = "Erro!"
-        error.style.color = "red";
-        error.style.fontWeight = "600";
-        error.style.fontSize = "1.8rem";
-        error.style.marginTop = "10px";
+        setError();
         return;
     } else {
-        error.innerText = '';
+        resetError();
     }
 
     let instruction = getInstruction();
@@ -33,13 +35,9 @@ btnCreate.addEventListener('click', (e) => {
 
     if (action) {
         createTable(isCreateTable, table, fields);
-        error.innerText = '';
+        resetError();
     } else {
-        error.innerText = "Erro!"
-        error.style.color = "red";
-        error.style.fontWeight = "600";
-        error.style.fontSize = "1.8rem";
-        error.style.marginTop = "10px";
+        setError();
     }
 });
 
@@ -47,14 +45,16 @@ btnInsert.addEventListener('click', (e) => {
 
     e.preventDefault();
 
+    let semicolon = validateSemicolon();
+
+    if (!semicolon) {
+        return
+    }
+
     if (!input.value.toUpperCase().includes('INSERT INTO')) {
-        error.innerText = "Erro!"
-        error.style.color = "red";
-        error.style.fontWeight = "600";
-        error.style.fontSize = "1.8rem";
-        error.style.marginTop = "10px";
+        setError();
     } else {
-        error.innerText = '';
+        resetError();
     }
 
     let instruction = getInstruction();
@@ -88,14 +88,11 @@ function createRow(table, fields, valores) {
         let child = document.querySelector(`.${campos[i]}`);
         try {
             if (campos[i] !== child.getAttribute("class")) {
+                resetError();
                 return;
             }
         } catch (erro) {
-            error.innerText = "Erro!"
-            error.style.color = "red";
-            error.style.fontWeight = "600";
-            error.style.fontSize = "1.8rem";
-            error.style.marginTop = "10px";
+            setError();
             return;
         }
 
@@ -207,9 +204,11 @@ function getValue() {
     let value = values[4];
 
     if (value.toUpperCase() === 'VALUES') {
+        resetError();
         return true;
     }
 
+    setError();
     return false;
 }
 
@@ -233,10 +232,42 @@ function getValues() {
 
     let fields = values[5];
 
-    let fieldsSepareted = fields.replace(/,/g, ' ');
-    fieldsSepareted = fieldsSepareted.replace('(', '');
-    fieldsSepareted = fieldsSepareted.replace(')', '');
-    fieldsSepareted = fieldsSepareted.replace(';', '');
+    try {
+        let fieldsSepareted = fields.replace(/,/g, ' ');
+        fieldsSepareted = fieldsSepareted.replace('(', '');
+        fieldsSepareted = fieldsSepareted.replace(')', '');
+        fieldsSepareted = fieldsSepareted.replace(';', '');
 
-    return fieldsSepareted;
+        resetError();
+
+        return fieldsSepareted;
+    } catch (erro) {
+        setError();
+    }
+
+}
+
+function validateSemicolon() {
+
+    let semicolon = input.value.includes(';');
+
+    if (semicolon) {
+        resetError()
+        return true;
+    } else {
+        setError();
+        return false;
+    }
+}
+
+function setError() {
+    error.innerText = "Erro!"
+    error.style.color = "red";
+    error.style.fontWeight = "600";
+    error.style.fontSize = "1.8rem";
+    error.style.marginTop = "10px";
+}
+
+function resetError() {
+    error.innerText = '';
 }
