@@ -9,7 +9,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
 a {
@@ -54,6 +53,7 @@ ul {
     color: aliceblue;
     text-align: justify;
     max-width: 80%;
+    margin-top: 20px;
 }
 
 footer {
@@ -202,5 +202,14 @@ tr:nth-child(1) {
     .video iframe {
         width: 240px;
         height: 160px;
+    }
+    .content {
+        padding: 10px 0 0 10px;
+    }
+    .title {
+        font-size: 1.2rem;
+    }
+    .text {
+        font-size: 0.8rem;
     }
 }
