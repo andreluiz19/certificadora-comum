@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
     margin: 0;
@@ -7,14 +7,14 @@
 }
 
 .container {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
 a {
     text-decoration: none;
-    color: #FFCE54;
+    color: #ffce54;
     font-size: 1.8rem;
     text-shadow: 2px 2px #454343;
 }
@@ -26,22 +26,22 @@ body {
 
 nav {
     background-color: #454343;
-    padding: 20px 0 20px 20px;
+    padding: 20px;
 }
 
 ul {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 20px;
     list-style: none;
+    gap: 10px;
 }
 
 .content {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    color: #FFCE54;
+    color: #ffce54;
 }
 
 .title {
@@ -58,10 +58,13 @@ ul {
 
 footer {
     background-color: #454343;
-    color: #FFCE54;
+    color: #ffce54;
     text-align: center;
     padding: 20px;
     font-size: 14px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .video {
@@ -70,6 +73,12 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    margin-top: 60px;
+}
+
+.video iframe {
+    width: 560px;
+    height: 380px;
 }
 
 .file {
@@ -89,7 +98,7 @@ footer {
 input {
     width: 100%;
     padding: 15px;
-    border: 1px solid #DDD;
+    border: 1px solid #ddd;
     border-radius: 5px;
     outline: none;
     font-size: 1rem;
@@ -102,19 +111,19 @@ input {
     width: 120px;
     border: none;
     border-radius: 8px;
-    color: #FFF;
+    color: #fff;
     font-size: 1.7rem;
     font-weight: 500;
     cursor: pointer;
 }
 
 .insert {
-    background-color: #0099FF;
+    background-color: #0099ff;
     height: 50px;
     width: 120px;
     border: none;
     border-radius: 8px;
-    color: #FFF;
+    color: #fff;
     font-size: 1.7rem;
     font-weight: 500;
     cursor: pointer;
@@ -129,16 +138,17 @@ table {
     width: 100%;
 }
 
-td, th {
+td,
+th {
     padding: 10px 15px;
     border: 1px solid #000;
     text-align: center;
-    background-color: #DDD;
+    background-color: #ddd;
     color: #000;
 }
 
 tr:nth-child(1) {
-    background-color: #DDD;
+    background-color: #ddd;
     color: #000;
 }
 
@@ -148,8 +158,49 @@ tr:nth-child(1) {
     width: 100px;
     border: none;
     border-radius: 8px;
-    color: #FFF;
+    color: #fff;
     font-size: 1.7rem;
     font-weight: 500;
     cursor: pointer;
+}
+
+@media (max-width: 1366px) {
+    nav {
+        padding: 10px;
+    }
+    a {
+        font-size: 1.1rem;
+    }
+    .video iframe {
+        width: 420px;
+        height: 300px;
+    }
+    li {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 5px;
+    }
+    a {
+        font-size: 0.7rem;
+    }
+    .video iframe {
+        width: 340px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    ul {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .video iframe {
+        width: 240px;
+        height: 160px;
+    }
 }

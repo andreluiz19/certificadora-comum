@@ -1,26 +1,25 @@
-let input = document.querySelector('.input-sql');
-let btnCreate = document.querySelector('.create');
-let btnInsert = document.querySelector('.insert');
-let btnClear = document.querySelector('.clear');
-let h1 = document.querySelector('.tableTitle');
-let error = document.querySelector('p');
-let tbody = document.querySelector('tbody');
+let input = document.querySelector(".input-sql");
+let btnCreate = document.querySelector(".create");
+let btnInsert = document.querySelector(".insert");
+let btnClear = document.querySelector(".clear");
+let h1 = document.querySelector(".tableTitle");
+let error = document.querySelector("p");
+let tbody = document.querySelector("tbody");
 let isCreateTable = false;
 
 // CREATE TABLE usuarios (id,email,senha);
 // INSERT INTO usuarios (id,email,senha) VALUES (1,'teste','teste');
 
-btnCreate.addEventListener('click', (e) => {
-
+btnCreate.addEventListener("click", (e) => {
     e.preventDefault();
 
     let semicolon = validateSemicolon();
 
     if (!semicolon) {
-        return
+        return;
     }
 
-    if (!input.value.toUpperCase().includes('CREATE TABLE')) {
+    if (!input.value.toUpperCase().includes("CREATE TABLE")) {
         setError();
         return;
     } else {
@@ -41,17 +40,16 @@ btnCreate.addEventListener('click', (e) => {
     }
 });
 
-btnInsert.addEventListener('click', (e) => {
-
+btnInsert.addEventListener("click", (e) => {
     e.preventDefault();
 
     let semicolon = validateSemicolon();
 
     if (!semicolon) {
-        return
+        return;
     }
 
-    if (!input.value.toUpperCase().includes('INSERT INTO')) {
+    if (!input.value.toUpperCase().includes("INSERT INTO")) {
         setError();
     } else {
         resetError();
@@ -69,17 +67,15 @@ btnInsert.addEventListener('click', (e) => {
         createRow(table, fields, valores);
     }
 
+    input.value = "";
+
     return;
-
 });
 
-btnClear.addEventListener('click', () => {
-
-});
+btnClear.addEventListener("click", () => {});
 
 function createRow(table, fields, valores) {
-
-    let string = h1.textContent.split(' ')[1];
+    let string = h1.textContent.split(" ")[1];
     string = string.replace(/"/g, "");
 
     let campos = fields.split(" ");
@@ -95,54 +91,54 @@ function createRow(table, fields, valores) {
             setError();
             return;
         }
-
     }
 
     if (string === table) {
+        let tr = document.createElement("tr");
 
-        let tr = document.createElement('tr');
-
-        let campos = valores.split(' ');
+        let campos = valores.split(" ");
 
         for (let i = 0; i < campos.length; i++) {
-            let td = document.createElement('td');
+            let td = document.createElement("td");
             td.innerText = campos[i].replace(/'/g, "");
             tr.appendChild(td);
         }
 
         tbody.appendChild(tr);
     }
-
 }
 
 function validateInstruction(instruction) {
-
     if (instruction.length == 2) {
-        if (instruction[0].toUpperCase() == 'CREATE' && instruction[1].toUpperCase() == 'TABLE') {
+        if (
+            instruction[0].toUpperCase() == "CREATE" &&
+            instruction[1].toUpperCase() == "TABLE"
+        ) {
             return true;
-        } else if (instruction[0].toUpperCase() == 'INSERT' && instruction[1].toUpperCase() == 'INTO') {
+        } else if (
+            instruction[0].toUpperCase() == "INSERT" &&
+            instruction[1].toUpperCase() == "INTO"
+        ) {
             return true;
         }
     }
 
     return false;
-
-};
+}
 
 function createTable(isCreate, table, fields) {
-
     if (isCreate) {
         return;
     }
 
-    let thead = document.querySelector('thead');
-    let tr = document.createElement('tr');
-    h1.innerText = "Tabela: " + "\"" + table + "\"";
+    let thead = document.querySelector("thead");
+    let tr = document.createElement("tr");
+    h1.innerText = "Tabela: " + '"' + table + '"';
 
-    const campos = fields.split(' ');
+    const campos = fields.split(" ");
 
     for (let i = 0; i < campos.length; i++) {
-        let th = document.createElement('th');
+        let th = document.createElement("th");
         th.classList.add(campos[i]);
         th.innerText = campos[i];
         tr.appendChild(th);
@@ -151,21 +147,19 @@ function createTable(isCreate, table, fields) {
     thead.appendChild(tr);
 
     isCreateTable = true;
-    input.value = ''
+    input.value = "";
 }
 
 function splitString() {
-
     let sql = input.value;
     let values = [];
 
-    values = sql.split(' ');
+    values = sql.split(" ");
 
     return values;
 }
 
 function getInstruction() {
-
     let values = splitString();
 
     let instruction = [];
@@ -175,7 +169,6 @@ function getInstruction() {
 }
 
 function getTable() {
-
     let values = splitString();
 
     let table = values[2];
@@ -184,26 +177,24 @@ function getTable() {
 }
 
 function getFields() {
-
     let values = splitString();
 
     let fields = values[3];
 
-    let fieldsSepareted = fields.replace(/,/g, ' ');
-    fieldsSepareted = fieldsSepareted.replace('(', '');
-    fieldsSepareted = fieldsSepareted.replace(')', '');
-    fieldsSepareted = fieldsSepareted.replace(';', '');
+    let fieldsSepareted = fields.replace(/,/g, " ");
+    fieldsSepareted = fieldsSepareted.replace("(", "");
+    fieldsSepareted = fieldsSepareted.replace(")", "");
+    fieldsSepareted = fieldsSepareted.replace(";", "");
 
     return fieldsSepareted;
 }
 
 function getValue() {
-
     let values = splitString();
 
     let value = values[4];
 
-    if (value.toUpperCase() === 'VALUES') {
+    if (value.toUpperCase() === "VALUES") {
         resetError();
         return true;
     }
@@ -213,30 +204,28 @@ function getValue() {
 }
 
 function getFieldsInsert() {
-
     let values = splitString();
 
     let fields = values[3];
 
-    let fieldsSepareted = fields.replace(/,/g, ' ');
-    fieldsSepareted = fieldsSepareted.replace('(', '');
-    fieldsSepareted = fieldsSepareted.replace(')', '');
-    fieldsSepareted = fieldsSepareted.replace(';', '');
+    let fieldsSepareted = fields.replace(/,/g, " ");
+    fieldsSepareted = fieldsSepareted.replace("(", "");
+    fieldsSepareted = fieldsSepareted.replace(")", "");
+    fieldsSepareted = fieldsSepareted.replace(";", "");
 
     return fieldsSepareted;
 }
 
 function getValues() {
-
     let values = splitString();
 
     let fields = values[5];
 
     try {
-        let fieldsSepareted = fields.replace(/,/g, ' ');
-        fieldsSepareted = fieldsSepareted.replace('(', '');
-        fieldsSepareted = fieldsSepareted.replace(')', '');
-        fieldsSepareted = fieldsSepareted.replace(';', '');
+        let fieldsSepareted = fields.replace(/,/g, " ");
+        fieldsSepareted = fieldsSepareted.replace("(", "");
+        fieldsSepareted = fieldsSepareted.replace(")", "");
+        fieldsSepareted = fieldsSepareted.replace(";", "");
 
         resetError();
 
@@ -244,15 +233,13 @@ function getValues() {
     } catch (erro) {
         setError();
     }
-
 }
 
 function validateSemicolon() {
-
-    let semicolon = input.value.includes(';');
+    let semicolon = input.value.includes(";");
 
     if (semicolon) {
-        resetError()
+        resetError();
         return true;
     } else {
         setError();
@@ -261,7 +248,7 @@ function validateSemicolon() {
 }
 
 function setError() {
-    error.innerText = "Erro!"
+    error.innerText = "Erro!";
     error.style.color = "red";
     error.style.fontWeight = "600";
     error.style.fontSize = "1.8rem";
@@ -269,5 +256,5 @@ function setError() {
 }
 
 function resetError() {
-    error.innerText = '';
+    error.innerText = "";
 }
