@@ -77,12 +77,12 @@ footer {
 }
 
 .video iframe {
-    width: 560px;
-    height: 380px;
+    width: 520px;
+    height: 300px;
 }
 
 .file {
-    margin-top: 80px;
+    margin-top: 20px;
 }
 
 .selected {
